@@ -2,7 +2,7 @@
 FROM bileyg/hangar
 
 LABEL project="Pilot-Server"\
-      version="0.0" \
+      version="1.0" \
       mantainer="bileyg"\
       company="Ascon Complex"
 
