@@ -8,8 +8,9 @@ LABEL project="Pilot-Server"\
       
 ENV ADMIN=root
 ENV PASS=whale
-ENV BASE=/mnt/vol1/Databases/pilot-bim_ru
-ENV FILEARCH=d95564b5-97c8-4b97-a043-25c4451dba00.pilotfa
+ENV DBNAME=""
+ENV DBPATH=""
+ENV FAFILE=""
 
 COPY build App/
 COPY scripts /App/
@@ -19,4 +20,4 @@ RUN mkdir Update
 COPY supervisor /etc/supervisor/conf.d/
 RUN ["chmod","+x","/App/Ascon.Pilot.Daemon"]
 RUN /App/Ascon.Pilot.Daemon --admin /App/settings.xml $ADMIN $PASS
-CMD /App/Ascon.Pilot.Daemon --add /App/settings.xml pilot-bim_ru $BASE/base.dbp $BASE/FileArchive/$FILEARCH && /usr/bin/supervisord
+CMD /App/Ascon.Pilot.Daemon --add /App/settings.xml $DBNAME $DBPATH/$DBNAME/base.dbp $DBPATH/$DBNAME/FileArchive/$FAFILE && /usr/bin/supervisord
