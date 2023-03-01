@@ -8,6 +8,7 @@ LABEL project="Pilot-Server"\
       
 ENV ADMIN=root
 ENV PASS=whale
+ENV SCENER=""
 ENV DBNAME=""
 ENV DBPATH=""
 ENV FAFILE=""
@@ -19,5 +20,7 @@ EXPOSE 5545
 RUN mkdir Update
 COPY supervisor /etc/supervisor/conf.d/
 RUN ["chmod","+x","/App/Ascon.Pilot.Daemon"]
+RUN ["chmod","+x","/App/dbattach.sh"]
 RUN /App/Ascon.Pilot.Daemon --admin /App/settings.xml $ADMIN $PASS
-CMD /App/Ascon.Pilot.Daemon --add /App/settings.xml $DBNAME $DBPATH/$DBNAME/base.dbp $DBPATH/$DBNAME/FileArchive/$FAFILE && /usr/bin/supervisord
+#CMD /App/Ascon.Pilot.Daemon --add /App/settings.xml $DBNAME $DBPATH/$DBNAME/base.dbp $DBPATH/$DBNAME/FileArchive/$FAFILE && /usr/bin/supervisord
+CMD /App/dbattach.sh $SCENER $DBNAME $DBPATH $FAFILE && /usr/bin/supervisord
