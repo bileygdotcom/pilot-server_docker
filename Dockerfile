@@ -1,14 +1,14 @@
 # syntax=docker/dockerfile:1
-FROM bileyg/hangar:0.9
+FROM bileyg/hangar:1.0
 
 LABEL project="Pilot-Server"\
-      version="1.5" \
+      version="1.6" \
       mantainer="bileyg"\
       company="Ascon Complex"
       
 ENV ADMIN=root
 ENV PASS=whale
-ENV SCENER=""
+ENV SCENERY=""
 ENV DBNAME=""
 ENV DBPATH=""
 ENV FAFILE=""
@@ -22,5 +22,4 @@ COPY supervisor /etc/supervisor/conf.d/
 RUN ["chmod","+x","/App/Ascon.Pilot.Daemon"]
 RUN ["chmod","+x","/App/dbattach.sh"]
 RUN /App/Ascon.Pilot.Daemon --admin /App/settings.xml $ADMIN $PASS
-#CMD /App/Ascon.Pilot.Daemon --add /App/settings.xml $DBNAME $DBPATH/$DBNAME/base.dbp $DBPATH/$DBNAME/FileArchive/$FAFILE && /usr/bin/supervisord
-CMD /App/dbattach.sh $SCENER $DBNAME $DBPATH $FAFILE && /usr/bin/supervisord
+CMD /App/dbattach.sh $SCENERY $DBNAME $DBPATH $FAFILE && /usr/bin/supervisord
