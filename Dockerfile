@@ -1,5 +1,5 @@
 #syntax=docker/dockerfile:1
-FROM bileyg/hangar:1.4
+FROM pilotdev/hangar:1.4
 
 LABEL project="Pilot-Server"\
       version="2.0" \
